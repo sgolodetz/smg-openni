@@ -5,8 +5,8 @@ from smg.openni.openni_camera import OpenNICamera
 
 def main():
     with OpenNICamera(mirror_images=True) as camera:
-        print(f"Colour Camera: Dims={camera.get_colour_dims()}, Intrinsics={camera.get_colour_intrinsics()}")
-        print(f"Depth Camera: Dims={camera.get_depth_dims()}, Intrinsics={camera.get_depth_intrinsics()}")
+        print(f"Colour Camera: Dims={camera.get_colour_size()}, Intrinsics={camera.get_colour_intrinsics()}")
+        print(f"Depth Camera: Dims={camera.get_depth_size()}, Intrinsics={camera.get_depth_intrinsics()}")
 
         _, ax = plt.subplots(1, 2)
 

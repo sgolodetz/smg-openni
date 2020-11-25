@@ -83,14 +83,6 @@ class OpenNICamera:
 
     # PUBLIC METHODS
 
-    def get_colour_dims(self) -> Tuple[int, int]:
-        """
-        Get the dimensions of the colour images.
-
-        :return:    The dimensions of the colour images, as a (width, height) tuple.
-        """
-        return self.__colour_width, self.__colour_height
-
     def get_colour_intrinsics(self) -> Tuple[float, float, float, float]:
         """
         Get the colour camera intrinsics.
@@ -99,13 +91,13 @@ class OpenNICamera:
         """
         return self.__colour_intrinsics
 
-    def get_depth_dims(self) -> Tuple[int, int]:
+    def get_colour_size(self) -> Tuple[int, int]:
         """
-        Get the dimensions of the depth images.
+        Get the size of the colour images.
 
-        :return:    The dimensions of the depth images, as a (width, height) tuple.
+        :return:    The size of the colour images, as a (width, height) tuple.
         """
-        return self.__depth_width, self.__depth_height
+        return self.__colour_width, self.__colour_height
 
     def get_depth_intrinsics(self) -> Tuple[float, float, float, float]:
         """
@@ -114,6 +106,14 @@ class OpenNICamera:
         :return:    The depth camera intrinsics, as an (fx, fy, cx, cy) tuple.
         """
         return self.__depth_intrinsics
+
+    def get_depth_size(self) -> Tuple[int, int]:
+        """
+        Get the size of the depth images.
+
+        :return:    The size of the depth images, as a (width, height) tuple.
+        """
+        return self.__depth_width, self.__depth_height
 
     def get_images(self) -> Tuple[np.ndarray, np.ndarray]:
         """
