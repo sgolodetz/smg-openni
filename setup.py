@@ -17,7 +17,8 @@ setup(
     install_requires=[
         "matplotlib",
         "numpy",
-        "openni"
+        "openni",
+        "smg-imagesources"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
