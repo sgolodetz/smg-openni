@@ -6,7 +6,7 @@ from smg.imagesources import RGBDImageSource
 from smg.openni import OpenNICamera
 
 
-class RGBDOpenNICamera(RGBDImageSource):
+class OpenNIRGBDImageSource(RGBDImageSource):
     """An RGB-D image source that wraps an OpenNI camera."""
 
     # CONSTRUCTOR

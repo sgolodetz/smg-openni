@@ -1,2 +1,2 @@
 from .openni_camera import OpenNICamera
-from .rgbd_openni_camera import RGBDOpenNICamera
+from .openni_rgbd_image_source import OpenNIRGBDImageSource
