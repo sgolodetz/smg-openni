@@ -3,7 +3,8 @@ import numpy as np
 from typing import Tuple
 
 from smg.imagesources import RGBDImageSource
-from smg.openni import OpenNICamera
+
+from .openni_camera import OpenNICamera
 
 
 class OpenNIRGBDImageSource(RGBDImageSource):
