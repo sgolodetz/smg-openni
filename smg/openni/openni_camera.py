@@ -1,6 +1,7 @@
 import math
 import numpy as np
 
+from func_timeout import func_timeout, FunctionTimedOut
 from openni import openni2
 from typing import Tuple
 
@@ -148,9 +149,12 @@ class OpenNICamera:
             self.__depth_stream.stop()
             self.__colour_stream.stop()
 
-            # If we're managing OpenNI, unload it.
+            # If we're managing OpenNI, try to unload it. If it won't unload after 2s, don't bother.
             if self.__manage_openni:
-                openni2.unload()
+                try:
+                    func_timeout(2, openni2.unload)
+                except FunctionTimedOut:
+                    pass
 
             self.__terminated = True
 
