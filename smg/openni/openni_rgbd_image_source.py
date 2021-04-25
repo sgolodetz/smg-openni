@@ -18,7 +18,8 @@ class OpenNIRGBDImageSource(RGBDImageSource):
 
         :param camera:  The OpenNI camera.
         """
-        self.__camera: OpenNICamera = camera
+        # : OpenNICamera
+        self.__camera = camera
 
     # PUBLIC METHODS
 

@@ -18,38 +18,47 @@ class OpenNICamera:
         :param debug:           Whether to print out debug messages.
         :param mirror_images:   Whether to horizontally mirror the depth and colour images (needed for a Kinect).
         """
-        self.__manage_openni: bool = manage_openni
-        self.__mirror_images: bool = mirror_images
-        self.__terminated: bool = False
+        # : bool
+        self.__manage_openni = manage_openni
+        # : bool
+        self.__mirror_images = mirror_images
+        # : bool
+        self.__terminated = False
 
         # If we're managing OpenNI, initialise it.
         if manage_openni:
             openni2.initialize()
 
         # Open the device (i.e. the camera).
-        self.__device: openni2.Device = openni2.Device.open_any()
+        # : openni2.Device
+        self.__device = openni2.Device.open_any()
         if debug:
             print("OpenNI Device Info: {}".format(self.__device.get_device_info()))
 
         # Create and start the depth stream, and tell OpenNI to register the depth and colour images.
-        self.__depth_stream: openni2.VideoStream = self.__device.create_depth_stream()
+        # : openni2.VideoStream
+        self.__depth_stream = self.__device.create_depth_stream()
         self.__depth_stream.start()
         self.__device.set_image_registration_mode(openni2.IMAGE_REGISTRATION_DEPTH_TO_COLOR)
         if debug:
             print("Depth Video Mode: {}".format(self.__depth_stream.get_video_mode()))
 
         # Create and start the colour stream.
-        self.__colour_stream: openni2.VideoStream = self.__device.create_color_stream()
+        # : openni2.VideoStream
+        self.__colour_stream = self.__device.create_color_stream()
         self.__colour_stream.start()
         if debug:
             print("Colour Video Mode: {}".format(self.__colour_stream.get_video_mode()))
 
         # Determine the depth camera intrinsics.
         # FIXME: The height and width shouldn't be hard-coded like this.
-        self.__depth_height: int = 480
-        self.__depth_width: int = 640
+        # : int
+        self.__depth_height = 480
+        # : int
+        self.__depth_width = 640
 
-        self.__depth_intrinsics: Tuple[float, float, float, float] = OpenNICamera.__make_intrinsics(
+        # : Tuple[float, float, float, float]
+        self.__depth_intrinsics = OpenNICamera.__make_intrinsics(
             self.__depth_width, self.__depth_height,
             self.__depth_stream.get_horizontal_fov(),
             self.__depth_stream.get_vertical_fov()
@@ -57,10 +66,13 @@ class OpenNICamera:
 
         # Determine the colour camera intrinsics.
         # FIXME: The height and width shouldn't be hard-coded like this.
-        self.__colour_height: int = 480
-        self.__colour_width: int = 640
+        # : int
+        self.__colour_height = 480
+        # : int
+        self.__colour_width = 640
 
-        self.__colour_intrinsics: Tuple[float, float, float, float] = OpenNICamera.__make_intrinsics(
+        # : Tuple[float, float, float, float]
+        self.__colour_intrinsics = OpenNICamera.__make_intrinsics(
             self.__colour_width, self.__colour_height,
             self.__colour_stream.get_horizontal_fov(),
             self.__colour_stream.get_vertical_fov()
@@ -128,10 +140,12 @@ class OpenNICamera:
         depth_data = depth_frame.get_buffer_as_uint16()
         colour_data = colour_frame.get_buffer_as_uint8()
 
-        depth_image: np.ndarray = np.frombuffer(depth_data, dtype=np.uint16) / 1000
+        # : np.ndarray
+        depth_image = np.frombuffer(depth_data, dtype=np.uint16) / 1000
         depth_image = depth_image.reshape((self.__depth_height, self.__depth_width))
 
-        colour_image: np.ndarray = np.frombuffer(colour_data, dtype=np.uint8)
+        # : np.ndarray
+        colour_image = np.frombuffer(colour_data, dtype=np.uint8)
         colour_image = colour_image.reshape((self.__colour_height, self.__colour_width, 3))
         colour_image = OpenNICamera.__flip_channels(colour_image)
 
