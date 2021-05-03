@@ -20,7 +20,7 @@ class OpenNICamera:
         """
         self.__manage_openni = manage_openni  # type: bool
         self.__mirror_images = mirror_images  # type: bool
-        self.__terminated = False  # type: bool
+        self.__terminated = False             # type: bool
 
         # If we're managing OpenNI, initialise it.
         if manage_openni:
@@ -49,7 +49,7 @@ class OpenNICamera:
         # Determine the depth camera intrinsics.
         # FIXME: The height and width shouldn't be hard-coded like this.
         self.__depth_height = 480  # type: int
-        self.__depth_width = 640  # type: int
+        self.__depth_width = 640   # type: int
 
         self.__depth_intrinsics = OpenNICamera.__make_intrinsics(
             self.__depth_width, self.__depth_height,
@@ -60,7 +60,7 @@ class OpenNICamera:
         # Determine the colour camera intrinsics.
         # FIXME: The height and width shouldn't be hard-coded like this.
         self.__colour_height = 480  # type: int
-        self.__colour_width = 640  # type: int
+        self.__colour_width = 640   # type: int
 
         self.__colour_intrinsics = OpenNICamera.__make_intrinsics(
             self.__colour_width, self.__colour_height,
